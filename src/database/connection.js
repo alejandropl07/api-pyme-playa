@@ -1,8 +1,11 @@
 import { Sequelize } from 'sequelize';
 
-const db = new Sequelize ('node_db', 'root', 'rndc960604',{
+const db = new Sequelize ('unevol_db', 'root', 'rndc960604',{
     host: 'localhost',
-    dialect: 'mysql'
+    dialect: 'mysql',
+    define: {
+        freezeTableName: true
+      }
 
 });
 

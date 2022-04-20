@@ -1,12 +1,16 @@
 import express from "express";
 import cors from "cors";
 import db from "../database/connection.js";
+import clientesRoutes from '../routes/cliente.js';
 
 
 export default class Server{
     constructor(){
         this.app = express();
         this.port = process.env.PORT;
+        this.clientesPath = {
+            clientes: '/clientes'
+        }
         this.dbConnection();
         this.middlewares();
         this.routes();
@@ -26,12 +30,12 @@ export default class Server{
     middlewares(){
         this.app.use(cors());
         this.app.use(express.json());
+        this.app.use(express.static('public'));
     }
 
     routes(){
-        this.app.get("/", (req, res) => {
-            res.send("Bienvenido")
-        });
+        this.app.use(this.clientesPath.clientes, clientesRoutes);
+        
     }
 
     listen(){
