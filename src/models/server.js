@@ -9,6 +9,7 @@ import divisionesRoutes from '../routes/division.js';
 import embarquesRoutes from '../routes/embarque.js';
 import proveedoresRoutes from '../routes/proveedor.js';
 import sucursalesRoutes from '../routes/sucursal.js';
+import tiposProductoRoutes from '../routes/tipoProducto.js';
 
 
 export default class Server{
@@ -24,6 +25,7 @@ export default class Server{
             embarques: '/embarques',
             proveedores: '/proveedores',
             sucursales: '/sucursales',
+            tiposProducto: '/tiposProducto',
         }
         this.dbConnection();
         this.middlewares();
@@ -56,6 +58,7 @@ export default class Server{
         this.app.use(this.apiPaths.embarques, embarquesRoutes);
         this.app.use(this.apiPaths.proveedores, proveedoresRoutes);
         this.app.use(this.apiPaths.sucursales, sucursalesRoutes);
+        this.app.use(this.apiPaths.tiposProducto, tiposProductoRoutes);
         
     }
 
