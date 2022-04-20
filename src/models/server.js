@@ -5,6 +5,9 @@ import clientesRoutes from '../routes/cliente.js';
 import monedasRoutes from '../routes/moneda.js';
 import clasesPedidoRoutes from '../routes/clasePedido.js';
 import destinosRoutes from '../routes/destino.js';
+import divisionesRoutes from '../routes/division.js';
+
+
 
 export default class Server{
     constructor(){
@@ -14,7 +17,8 @@ export default class Server{
             clientes: '/clientes',
             monedas: '/monedas',
             clasesPedido: '/clasesPedido',
-            destinos: '/destinos'
+            destinos: '/destinos',
+            divisiones: '/divisiones'
         }
         this.dbConnection();
         this.middlewares();
@@ -43,6 +47,7 @@ export default class Server{
         this.app.use(this.apiPaths.monedas, monedasRoutes);
         this.app.use(this.apiPaths.clasesPedido, clasesPedidoRoutes);
         this.app.use(this.apiPaths.destinos, destinosRoutes);
+        this.app.use(this.apiPaths.divisiones, divisionesRoutes);
         
     }
 
