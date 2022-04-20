@@ -18,7 +18,7 @@ export const postCliente = async (req, res) => {
 
         if(existeNombre){
             return res.status(400).json({
-                msg: `Ya existe un cliente con el nombre ${body.nombre}` 
+                msg: `Ya existe un cliente con el nombre ${body.descrip_cliente}` 
             });
         }
 
