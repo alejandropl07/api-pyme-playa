@@ -3,8 +3,8 @@ import cors from "cors";
 import db from "../database/connection.js";
 import clientesRoutes from '../routes/cliente.js';
 import monedasRoutes from '../routes/moneda.js';
-import clasePedidoRoutes from '../routes/clasePedido.js';
-
+import clasesPedidoRoutes from '../routes/clasePedido.js';
+import destinosRoutes from '../routes/destino.js';
 
 export default class Server{
     constructor(){
@@ -14,6 +14,7 @@ export default class Server{
             clientes: '/clientes',
             monedas: '/monedas',
             clasesPedido: '/clasesPedido',
+            destinos: '/destinos'
         }
         this.dbConnection();
         this.middlewares();
@@ -40,7 +41,8 @@ export default class Server{
     routes(){
         this.app.use(this.apiPaths.clientes, clientesRoutes);
         this.app.use(this.apiPaths.monedas, monedasRoutes);
-        this.app.use(this.apiPaths.clasesPedido, clasePedidoRoutes);
+        this.app.use(this.apiPaths.clasesPedido, clasesPedidoRoutes);
+        this.app.use(this.apiPaths.destinos, destinosRoutes);
         
     }
 
