@@ -2,14 +2,16 @@ import express from "express";
 import cors from "cors";
 import db from "../database/connection.js";
 import clientesRoutes from '../routes/cliente.js';
+import monedasRoutes from '../routes/moneda.js';
 
 
 export default class Server{
     constructor(){
         this.app = express();
         this.port = process.env.PORT;
-        this.clientesPath = {
-            clientes: '/clientes'
+        this.apiPaths = {
+            clientes: '/clientes',
+            monedas: '/monedas',
         }
         this.dbConnection();
         this.middlewares();
@@ -34,7 +36,8 @@ export default class Server{
     }
 
     routes(){
-        this.app.use(this.clientesPath.clientes, clientesRoutes);
+        this.app.use(this.apiPaths.clientes, clientesRoutes);
+        this.app.use(this.apiPaths.monedas, monedasRoutes);
         
     }
 
