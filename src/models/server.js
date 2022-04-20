@@ -7,6 +7,7 @@ import clasesPedidoRoutes from '../routes/clasePedido.js';
 import destinosRoutes from '../routes/destino.js';
 import divisionesRoutes from '../routes/division.js';
 import embarquesRoutes from '../routes/embarque.js';
+import proveedoresRoutes from '../routes/proveedor.js';
 
 
 export default class Server{
@@ -20,6 +21,7 @@ export default class Server{
             destinos: '/destinos',
             divisiones: '/divisiones',
             embarques: '/embarques',
+            proveedores: '/proveedores',
         }
         this.dbConnection();
         this.middlewares();
@@ -50,6 +52,7 @@ export default class Server{
         this.app.use(this.apiPaths.destinos, destinosRoutes);
         this.app.use(this.apiPaths.divisiones, divisionesRoutes);
         this.app.use(this.apiPaths.embarques, embarquesRoutes);
+        this.app.use(this.apiPaths.proveedores, proveedoresRoutes);
         
     }
 
