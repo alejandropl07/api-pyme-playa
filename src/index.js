@@ -1,18 +1,8 @@
-import express from "express";
-import morgan from "morgan";
 import dotenv from "dotenv";
+import Server from "./models/server.js";
 
 dotenv.config();
 
-const app   =   express()
-const port  =   process.env.PORT;
+const server = new Server();
 
-app.use(morgan('dev'));
-
-app.get("/",    (req,   res)    =>  {
-    res.send("Hello world")
-});
-
-app.listen(port,    ()  =>  {
-    console.log(`Server is listening at port ${port}`);
-})
+server.listen();
