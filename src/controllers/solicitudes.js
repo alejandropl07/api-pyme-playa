@@ -1,6 +1,4 @@
 import Solicitud from "../models/solicitud.js"
-import  db from "../database/connection.js";
-
 
 export const postSolicitud = async (req, res) => {
     const { body } = req;
@@ -18,16 +16,10 @@ export const postSolicitud = async (req, res) => {
         })
     }
 }
-
 export const getSolicitudes = async (req, res) => {
-  await db.query("SELECT id_solicitud, descrip_solicitud FROM tc_solicitud")
-  .then(([results, metadata]) => {
-    res.send(results);
-  })
-  .catch(err => {
-  res.status(500).send({
-    message:
-      err.message || "Some error occurred while retrieving."
-  });
-}); 
+    const solicitudes = await Solicitud.findAll({
+        attributes: ['id_solicitud', 'descrip_solicitud']
+    });
+
+    res.json({solicitudes});
 }
