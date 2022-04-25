@@ -1,7 +1,7 @@
-import Destino from "../models/destino.js"
+import Models from "../models/index.js"
 
 export const getDestinos = async (req, res) => {
-    const destinos = await Destino.findAll();
+    const destinos = await Models.Destino.findAll();
 
     res.json({destinos});
 }

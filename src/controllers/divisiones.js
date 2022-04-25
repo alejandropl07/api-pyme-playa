@@ -1,7 +1,7 @@
-import Division from "../models/division.js"
+import Models from "../models/index.js"
 
 export const getDivisiones = async (req, res) => {
-    const divisiones = await Division.findAll();
+    const divisiones = await Models.Division.findAll();
 
     res.json({divisiones});
 }

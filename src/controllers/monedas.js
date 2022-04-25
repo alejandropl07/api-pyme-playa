@@ -1,7 +1,7 @@
-import Moneda from "../models/moneda.js"
+import Models from "../models/index.js"
 
 export const getMonedas = async (req, res) => {
-    const monedas = await Moneda.findAll();
+    const monedas = await Models.Moneda.findAll();
 
     res.json({monedas});
 }

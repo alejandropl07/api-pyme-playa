@@ -1,7 +1,7 @@
-import Sucursal from "../models/sucursal.js"
+import Models from "../models/index.js"
 
 export const getSucursales = async (req, res) => {
-    const sucursal = await Sucursal.findAll();
+    const sucursal = await Models.Sucursal.findAll();
 
     res.json({sucursal});
 }

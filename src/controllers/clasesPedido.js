@@ -1,7 +1,7 @@
-import ClasePedido from "../models/clasePedido.js"
+import Models from "../models/index.js"
 
 export const getClasesPedido = async (req, res) => {
-    const clasesPedido = await ClasePedido.findAll();
+    const clasesPedido = await Models.ClasePedido.findAll();
 
     res.json({clasesPedido});
 }

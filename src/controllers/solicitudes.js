@@ -1,7 +1,7 @@
-import Solicitud from "../models/solicitud.js"
+import Models from "../models/index.js"
 
 export const getSolicitudes = async (req, res) => {
-    const solicitudes = await Solicitud.findAll({
+    const solicitudes = await Models.Solicitud.findAll({
         attributes: ['id_solicitud', 'descrip_solicitud']
     });
 
@@ -10,7 +10,7 @@ export const getSolicitudes = async (req, res) => {
 
 export const getSolicitud = async (req, res) => {
     const {id} = req.params;
-    const solicitud = await Solicitud.findByPk(id);
+    const solicitud = await Models.Solicitud.findByPk(id);
 
     if( solicitud ){
         res.json(solicitud);
@@ -27,7 +27,7 @@ export const postSolicitud = async (req, res) => {
 
     try{
         
-        const solicitud = await Solicitud.create(body);
+        const solicitud = await Models.Solicitud.create(body);
         res.json(solicitud);
     }catch(error){
         console.log(error);

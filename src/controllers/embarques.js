@@ -1,7 +1,7 @@
-import Embarque from "../models/embarque.js"
+import Models from "../models/index.js"
 
 export const getEmbarques = async (req, res) => {
-    const embarques = await Embarque.findAll();
+    const embarques = await Models.Embarque.findAll();
 
     res.json({embarques});
 }
