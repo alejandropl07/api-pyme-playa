@@ -12,7 +12,7 @@ export const getSolicitud = async (req, res) => {
     const {id} = req.params;
     const solicitud = await Models.Solicitud.findByPk(id, {
         include: 
-          [Models.Division, Models.Sucursal, Models.Proveedor, Models.ClasePedido, Models.Embarque, Models.Cliente, Models.Destino, Models.TipoProducto, Models.Moneda ]
+          [Models.Division, Models.Sucursal, Models.Proveedor, Models.ClasePedido, Models.Embarque, Models.Cliente, Models.Destino, Models.TipoProducto, Models.Moneda, Models.Usuario ]
     });
 
     if( solicitud ){
@@ -24,6 +24,11 @@ export const getSolicitud = async (req, res) => {
     }
 
 }
+
+// export const getSolicitudUsuario = async (req, res) => {
+//     const {id} = req.params;
+//     //const usuario = await Models.Usua
+// }
 
 export const postSolicitud = async (req, res) => {
     const { body } = req;
