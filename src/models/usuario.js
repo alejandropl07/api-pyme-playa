@@ -9,6 +9,10 @@ const Usuario = db.define("tc_usuario", {
         primaryKey : true, 
         unique : true},
 
+    nombre_usuario:{
+         type: DataTypes.STRING
+    },
+
     rol_usuario:{
         type: DataTypes.STRING
     },

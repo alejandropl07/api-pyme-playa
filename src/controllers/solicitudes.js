@@ -1,13 +1,5 @@
 import Models from "../models/index.js"
 
-export const getSolicitudes = async (req, res) => {
-    const solicitudes = await Models.Solicitud.findAll({
-        attributes: ['id_solicitud', 'descrip_solicitud']
-    });
-
-    res.json({solicitudes});
-}
-
 export const getSolicitud = async (req, res) => {
     const {id} = req.params;
     const solicitud = await Models.Solicitud.findByPk(id, {
@@ -25,10 +17,36 @@ export const getSolicitud = async (req, res) => {
 
 }
 
-// export const getSolicitudUsuario = async (req, res) => {
-//     const {id} = req.params;
-//     //const usuario = await Models.Usua
-// }
+export const getSolicitudesUsuario = async (req, res) => {
+    const {id} = req.params;
+    const usuario = await Models.Usuario.findByPk (id);
+
+    if(usuario){
+        if(usuario.rol_usuario === 'Comercial'){
+    
+            const solicitudes = await Models.Solicitud.findAll({
+                where:{
+                    id_comercial: usuario.id_usuario
+                },
+                attributes: ['id_solicitud', 'descrip_solicitud']
+                
+            })
+            res.json(solicitudes);
+
+        } 
+        else if(usuario.rol_usuario === 'Director'){
+            const solicitudes = await Models.Solicitud.findAll({
+                attributes: ['id_solicitud', 'descrip_solicitud']
+            })
+            res.json(solicitudes);
+        }
+    }
+    else{
+        res.status(404).json({
+            msg: `No existen solicitudes para el usuario con el id ${id} `
+        });
+    } 
+}
 
 export const postSolicitud = async (req, res) => {
     const { body } = req;

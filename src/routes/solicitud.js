@@ -1,15 +1,13 @@
 import { Router } from "express";
-import { getSolicitudes, 
-         getSolicitud,
-        // getSolicitudUsuario,
+import { getSolicitud,
+         getSolicitudesUsuario,
          postSolicitud 
     } from "../controllers/solicitudes.js";
 
 const router = Router();
 
-router.get('/', getSolicitudes);
 router.get('/:id', getSolicitud);
-//router.get('/:id', getSolicitudUsuario);
+router.get('/usuario/:id', getSolicitudesUsuario);
 router.post('/', postSolicitud);
 
 export default router;
