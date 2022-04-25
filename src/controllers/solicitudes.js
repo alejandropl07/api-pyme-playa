@@ -4,7 +4,7 @@ export const getSolicitud = async (req, res) => {
     const {id} = req.params;
     const solicitud = await Models.Solicitud.findByPk(id, {
         include: 
-          [Models.Division, Models.Sucursal, Models.Proveedor, Models.ClasePedido, Models.Embarque, Models.Cliente, Models.Destino, Models.TipoProducto, Models.Moneda, Models.Usuario ]
+          [Models.Division, Models.Sucursal, Models.Proveedor, Models.ClasePedido, Models.Embarque, Models.Cliente, Models.Destino, Models.TipoProducto, Models.Moneda, Models.Usuario, Models.SolicitudProducto ]
     });
 
     if( solicitud ){

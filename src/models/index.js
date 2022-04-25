@@ -9,6 +9,7 @@ import Sucursal from "./sucursal.js"
 import TipoProducto from "./tipoProducto.js"
 import Solicitud from "./solicitud.js"
 import Usuario from "./usuario.js"
+import SolicitudProducto from "./solicitud_producto.js"
 
 Solicitud.belongsTo(Division, {foreignKey: "id_division"});
 Division.hasMany(Solicitud, {foreignKey: "id_division"});
@@ -40,6 +41,9 @@ Moneda.hasMany(Solicitud, {foreignKey: "id_moneda"});
 Solicitud.belongsTo(Usuario, {foreignKey: "id_comercial"});
 Usuario.hasMany(Solicitud, {foreignKey: "id_comercial"});
 
+SolicitudProducto.belongsTo(Solicitud, {foreignKey: "id_solicitud"});
+Solicitud.hasMany(SolicitudProducto, {foreignKey: "id_solicitud"});
+
 
 const Models = {
     Cliente,
@@ -52,7 +56,8 @@ const Models = {
     Sucursal,
     TipoProducto,
     Solicitud,
-    Usuario
+    Usuario,
+    SolicitudProducto
 }
 
 export default Models;
