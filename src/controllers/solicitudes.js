@@ -51,10 +51,20 @@ export const getSolicitudesUsuario = async (req, res) => {
 export const postSolicitud = async (req, res) => {
     const { body } = req;
 
+    const { productos } = body;
+
+   // console.log(productos[0].Pfx);
+    
     try{
         
         const solicitud = await Models.Solicitud.create(body);
+        productos.map(producto => {
+             Models.SolicitudProducto.create({id_solicitud: solicitud.id_solicitud, id_proveedor:producto.Pfx, id_producto: producto.Código,  cantidad: producto.Cantidad});
+
+        });
+
         res.json(solicitud);
+      
     }catch(error){
         console.log(error);
         res.status(500).json({
@@ -62,5 +72,5 @@ export const postSolicitud = async (req, res) => {
             
         })
     }
-}
+ }
 
