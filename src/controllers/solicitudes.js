@@ -38,6 +38,7 @@ export const getSolicitudesUsuario = async (req, res) => {
             const solicitudes = await Models.Solicitud.findAll({
                 attributes: ['id_solicitud', 'descrip_solicitud']
             })
+        
             res.json(solicitudes);
         }
     }
@@ -48,16 +49,27 @@ export const getSolicitudesUsuario = async (req, res) => {
     } 
 }
 
+export const isRolDirector = async (req, res) => {
+    const { id } = req.params;
+    const usuario = await Models.Usuario.findByPk(id);
+    let result = false;
+
+    if(usuario.rol_usuario === 'Director'){
+        result = true;
+    }
+
+    res.send(result);
+}
+
 export const postSolicitud = async (req, res) => {
     const { body } = req;
 
     const { productos } = body;
-
-   // console.log(productos[0].Pfx);
     
     try{
         
         const solicitud = await Models.Solicitud.create(body);
+        
         productos.map(producto => {
              Models.SolicitudProducto.create({id_solicitud: solicitud.id_solicitud, id_proveedor:producto.Pfx, id_producto: producto.Código,  cantidad: producto.Cantidad});
 
