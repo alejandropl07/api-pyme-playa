@@ -125,9 +125,7 @@ export const aprobarSolicitud = async (req, res) => {
 
     if (solicitud) {
       solicitud.update({ fecha_aprobada: new Date() });
-      res.status(200).json({
-        msg: "Fecha de aprobación de solicitud modificada correctamente",
-      });
+      res.json(solicitud);
     } else {
       res.status(404).json({
         msg: `No existe una solicitud con el id ${id}`,
