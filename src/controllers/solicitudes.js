@@ -110,9 +110,47 @@ export const postSolicitud = async (req, res) => {
       msg: "Solicitud creada correctamente",
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       msg: "Ha ocurrido un problema. Consulte con el administrador",
+    });
+  }
+};
+
+export const putSolicitud = async (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+  const { productos } = body;
+
+  try {
+    const solicitud = await Models.Solicitud.findByPk(id);
+    if (solicitud) {
+      await solicitud.update(body);
+
+      Models.SolicitudProducto.destroy({
+        where: {
+          id_solicitud: id,
+        },
+      });
+
+      productos.map((producto) => {
+        Models.SolicitudProducto.create({
+          id_solicitud: solicitud.id_solicitud,
+          id_proveedor: producto.Pfx,
+          id_producto: producto.Código,
+          cantidad: producto.Cantidad,
+        });
+      });
+    } else {
+      res.status(404).json({
+        msg: `No existe una solicitud con el id ${id}`,
+      });
+    }
+    res.status(200).json({
+      msg: "Solicitud modificada correctamente",
+    });
+  } catch (error) {
+    res.status(500).json({
+      msg: "No se pudo realizar la operación. Póngase en contacto con el administrador",
     });
   }
 };
