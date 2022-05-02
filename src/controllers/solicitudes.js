@@ -44,12 +44,12 @@ export const getSolicitudesUsuario = async (req, res) => {
           where: {
             id_comercial: usuario.id_usuario,
           },
-          attributes: ["id_solicitud", "descrip_solicitud"],
+          attributes: ["id_solicitud", "descrip_solicitud", "fecha_aprobada"],
         });
         res.json(solicitudes);
       } else if (usuario.rol_usuario === "Director") {
         const solicitudes = await Models.Solicitud.findAll({
-          attributes: ["id_solicitud", "descrip_solicitud"],
+          attributes: ["id_solicitud", "descrip_solicitud", "fecha_aprobada"],
         });
 
         res.json(solicitudes);
