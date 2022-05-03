@@ -68,7 +68,6 @@ export const getSolicitudesUsuario = async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       msg: "No se pudo realizar la operación. Póngase en contacto con el administrador",
     });
