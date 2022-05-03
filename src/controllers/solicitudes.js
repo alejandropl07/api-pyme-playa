@@ -44,7 +44,7 @@ export const getSolicitudesUsuario = async (req, res) => {
           where: {
             id_comercial: usuario.id_usuario,
           },
-          attributes: ["id_solicitud", "descrip_solicitud", "fecha_aprobada"],
+          attributes: ["id_solicitud", "descrip_solicitud", "fecha_finalizada"],
         });
         res.json(solicitudes);
       } else if (usuario.rol_usuario === "Director") {
@@ -163,6 +163,27 @@ export const aprobarSolicitud = async (req, res) => {
 
     if (solicitud) {
       solicitud.update({ fecha_aprobada: new Date() });
+      res.json(solicitud);
+    } else {
+      res.status(404).json({
+        msg: `No existe una solicitud con el id ${id}`,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      msg: "No se pudo realizar la operación. Póngase en contacto con el administrador",
+    });
+  }
+};
+
+export const finalizarSolicitud = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const solicitud = await Models.Solicitud.findByPk(id);
+
+    if (solicitud) {
+      solicitud.update({ fecha_finalizada: new Date() });
       res.json(solicitud);
     } else {
       res.status(404).json({
