@@ -1,4 +1,6 @@
+
 import Models from "../models/index.js";
+import {Op} from 'sequelize';
 
 export const getSolicitud = async (req, res) => {
   const { id } = req.params;
@@ -49,6 +51,12 @@ export const getSolicitudesUsuario = async (req, res) => {
         res.json(solicitudes);
       } else if (usuario.rol_usuario === "Director") {
         const solicitudes = await Models.Solicitud.findAll({
+          where:{
+            fecha_finalizada: {
+              [Op.not]: null // Like: sellDate IS NOT NULL
+            }
+          },
+         
           attributes: ["id_solicitud", "descrip_solicitud", "fecha_aprobada"],
         });
 
@@ -60,6 +68,7 @@ export const getSolicitudesUsuario = async (req, res) => {
       });
     }
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       msg: "No se pudo realizar la operación. Póngase en contacto con el administrador",
     });
