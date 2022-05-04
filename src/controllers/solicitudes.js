@@ -54,6 +54,9 @@ export const getSolicitudesUsuario = async (req, res) => {
           where:{
             fecha_finalizada: {
               [Op.not]: null // Like: sellDate IS NOT NULL
+            },
+            fecha_aprobada: {
+              [Op.is]: null // Like: sellDate IS NOT NULL
             }
           },
          
