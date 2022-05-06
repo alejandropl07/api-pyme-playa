@@ -57,10 +57,13 @@ export const getSolicitudesUsuario = async (req, res) => {
             },
             fecha_aprobada: {
               [Op.is]: null // Like: sellDate IS NOT NULL
-            }
+            },
+            fecha_rechazada: {
+              [Op.is]: null // Like: sellDate IS NOT NULL
+            },
           },
          
-          attributes: ["id_solicitud", "descrip_solicitud", "fecha_aprobada"],
+          attributes: ["id_solicitud", "descrip_solicitud", "fecha_aprobada", "fecha_rechazada"],
         });
 
         res.json(solicitudes);
