@@ -7,6 +7,7 @@ import {
   putSolicitud,
   aprobarSolicitud,
   finalizarSolicitud,
+  rechazarSolicitud,
 } from "../controllers/solicitudes.js";
 
 const router = Router();
@@ -17,6 +18,7 @@ router.get("/usuarioDirector/:id", isRolDirector);
 router.post("/", postSolicitud);
 router.put("/:id", putSolicitud);
 router.put("/aprobarSolicitud/:id", aprobarSolicitud);
+router.put("/rechazarSolicitud/:id", rechazarSolicitud);
 router.put("/finalizarSolicitud/:id", finalizarSolicitud);
 
 export default router;

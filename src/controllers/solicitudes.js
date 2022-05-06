@@ -187,6 +187,29 @@ export const aprobarSolicitud = async (req, res) => {
   }
 };
 
+
+export const rechazarSolicitud = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const solicitud = await Models.Solicitud.findByPk(id);
+
+    if (solicitud) {
+      solicitud.update({ fecha_rechazada: new Date() });
+      res.json(solicitud);
+    } else {
+      res.status(404).json({
+        msg: `No existe una solicitud con el id ${id}`,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      msg: "No se pudo realizar la operación. Póngase en contacto con el administrador",
+    });
+  }
+};
+
+
 export const finalizarSolicitud = async (req, res) => {
   const { id } = req.params;
 

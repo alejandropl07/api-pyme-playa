@@ -10,6 +10,10 @@ const Solicitud = db.define("tc_solicitud", {
         unique : true
     },
 
+    referencia:{
+        type: DataTypes.STRING
+    },
+
     descrip_solicitud:{
         type: DataTypes.STRING
     },
@@ -31,6 +35,10 @@ const Solicitud = db.define("tc_solicitud", {
     },
 
     fecha_aprobada:{
+        type: DataTypes.DATE
+    },
+
+    fecha_rechazada:{
         type: DataTypes.DATE
     },
 
