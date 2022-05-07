@@ -104,9 +104,34 @@ export const isRolDirector = async (req, res) => {
   }
 };
 
+export const isRolLogistico = async (req, res) => {
+  const { id } = req.params;
+  let result = false;
+
+  try {
+    const usuario = await Models.Usuario.findByPk(id);
+    if (usuario) {
+      if (usuario.rol_usuario === "Logistico") {
+        result = true;
+      }
+
+      res.json(result);
+    } else {
+      res.status(404).json({
+        msg: `No existe un usuario con el id ${id}`,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      msg: "No se pudo realizar la operación. Póngase en contacto con el administrador",
+    });
+  }
+};
+
 export const postSolicitud = async (req, res) => {
   const { body } = req;
   const { productos } = body;
+  console.log(productos);
 
   try {
     const solicitud = await Models.Solicitud.create(body);
@@ -134,6 +159,7 @@ export const putSolicitud = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
   const { productos } = body;
+  console.log(productos);
 
   try {
     const solicitud = await Models.Solicitud.findByPk(id);
@@ -149,9 +175,9 @@ export const putSolicitud = async (req, res) => {
       productos.map((producto) => {
         Models.SolicitudProducto.create({
           id_solicitud: solicitud.id_solicitud,
-          id_proveedor: producto.Pfx,
-          id_producto: producto.Código,
-          cantidad: producto.Cantidad,
+          id_proveedor: producto.id_proveedor,
+          id_producto: producto.id_producto,
+          cantidad: producto.cantidad,
         });
       });
     } else {

@@ -3,6 +3,7 @@ import {
   getSolicitud,
   getSolicitudesUsuario,
   isRolDirector,
+  isRolLogistico,
   postSolicitud,
   putSolicitud,
   aprobarSolicitud,
@@ -16,6 +17,7 @@ const router = Router();
 router.get("/:id", getSolicitud);
 router.get("/usuario/:id", getSolicitudesUsuario);
 router.get("/usuarioDirector/:id", isRolDirector);
+router.get("/usuarioLogistico/:id", isRolLogistico);
 router.post("/", postSolicitud);
 router.put("/:id", putSolicitud);
 router.put("/aprobarSolicitud/:id", aprobarSolicitud);
