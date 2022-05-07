@@ -56,17 +56,14 @@ export const getSolicitudesUsuario = async (req, res) => {
               [Op.not]: null // Like: sellDate IS NOT NULL
             },
             fecha_aprobada: {
-              [Op.is]: null // Like: sellDate IS NOT NULL
+              [Op.is]: null // Like: sellDate IS NULL
             },
             fecha_rechazada: {
-              [Op.is]: null // Like: sellDate IS NOT NULL
-            },
-            fecha_espera: {
-              [Op.is]: null // Like: sellDate IS NOT NULL
+              [Op.is]: null // Like: sellDate IS NULL
             },
           },
          
-          attributes: ["id_solicitud", "descrip_solicitud", "fecha_aprobada", "fecha_rechazada",  "fecha_espera"],
+          attributes: ["id_solicitud", "descrip_solicitud", "fecha_aprobada", "fecha_rechazada", "fecha_espera"],
         });
 
         res.json(solicitudes);
@@ -179,7 +176,10 @@ export const aprobarSolicitud = async (req, res) => {
     const solicitud = await Models.Solicitud.findByPk(id);
 
     if (solicitud) {
-      solicitud.update({ fecha_aprobada: new Date() });
+      if(solicitud.causa_espera === "")
+         solicitud.update({ fecha_aprobada: new Date()});
+      else
+         solicitud.update({ fecha_aprobada: new Date(), causa_espera: "", fecha_espera: null });
       res.json(solicitud);
     } else {
       res.status(404).json({
@@ -201,7 +201,10 @@ export const rechazarSolicitud = async (req, res) => {
     const solicitud = await Models.Solicitud.findByPk(id);
 
     if (solicitud) {
-      solicitud.update({ fecha_rechazada: new Date() });
+      if(solicitud.causa_espera === "")
+          solicitud.update({ fecha_rechazada: new Date() });
+      else
+          solicitud.update({ fecha_rechazada: new Date(), causa_espera: "", fecha_espera: null });
       res.json(solicitud);
     } else {
       res.status(404).json({
@@ -224,7 +227,7 @@ export const esperarSolicitud = async (req, res) => {
     const solicitud = await Models.Solicitud.findByPk(id);
 
     if (solicitud) {
-      solicitud.update({ fecha_espera: new Date(), causa_espera: causa_espera});
+      solicitud.update({ fecha_espera: new Date(), causa_espera});
       res.json(solicitud);
     } else {
       res.status(404).json({
