@@ -9,17 +9,17 @@ const SolicitudProducto = db.define("tc_solicitud_producto", {
         unique : true
     },
 
-    id_producto:{
+    Código:{
         type:DataTypes.BIGINT(11), 
         primaryKey : true, 
         unique : true
     },
 
-    id_proveedor:{
+    Pfx:{
         type: DataTypes.INTEGER
     },
 
-    cantidad:{
+    Cantidad:{
         type: DataTypes.INTEGER
     },
       

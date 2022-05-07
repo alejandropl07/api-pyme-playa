@@ -131,7 +131,6 @@ export const isRolLogistico = async (req, res) => {
 export const postSolicitud = async (req, res) => {
   const { body } = req;
   const { productos } = body;
-  console.log(productos);
 
   try {
     const solicitud = await Models.Solicitud.create(body);
@@ -139,8 +138,8 @@ export const postSolicitud = async (req, res) => {
     productos.map((producto) => {
       Models.SolicitudProducto.create({
         id_solicitud: solicitud.id_solicitud,
-        id_proveedor: producto.Pfx,
-        id_producto: producto.Código,
+        Pfx: producto.Pfx,
+        Código: producto.Código,
         cantidad: producto.Cantidad,
       });
     });
@@ -159,7 +158,7 @@ export const putSolicitud = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
   const { productos } = body;
-  console.log(productos);
+  
 
   try {
     const solicitud = await Models.Solicitud.findByPk(id);
@@ -175,9 +174,9 @@ export const putSolicitud = async (req, res) => {
       productos.map((producto) => {
         Models.SolicitudProducto.create({
           id_solicitud: solicitud.id_solicitud,
-          id_proveedor: producto.id_proveedor,
-          id_producto: producto.id_producto,
-          cantidad: producto.cantidad,
+          Pfx: producto.Pfx,
+          Código: producto.Código,
+          Cantidad: producto.Cantidad,
         });
       });
     } else {
