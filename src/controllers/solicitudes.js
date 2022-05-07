@@ -224,7 +224,7 @@ export const esperarSolicitud = async (req, res) => {
     const solicitud = await Models.Solicitud.findByPk(id);
 
     if (solicitud) {
-      solicitud.update({ fecha_espera: new Date()});
+      solicitud.update({ fecha_espera: new Date(), causa_espera: causa_espera});
       res.json(solicitud);
     } else {
       res.status(404).json({
