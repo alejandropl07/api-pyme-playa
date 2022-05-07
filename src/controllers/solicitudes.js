@@ -140,7 +140,7 @@ export const postSolicitud = async (req, res) => {
         id_solicitud: solicitud.id_solicitud,
         Pfx: producto.Pfx,
         Código: producto.Código,
-        cantidad: producto.Cantidad,
+        Cantidad: producto.Cantidad,
       });
     });
 
