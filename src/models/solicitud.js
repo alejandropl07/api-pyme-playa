@@ -26,6 +26,10 @@ const Solicitud = db.define("tc_solicitud", {
         type: DataTypes.STRING
     },
 
+    causa_espera:{
+        type: DataTypes.STRING
+    },
+
     contrato_solicitud:{
         type: DataTypes.STRING
     },
@@ -35,6 +39,10 @@ const Solicitud = db.define("tc_solicitud", {
     },
 
     fecha_aprobada:{
+        type: DataTypes.DATE
+    },
+
+    fecha_espera:{
         type: DataTypes.DATE
     },
 

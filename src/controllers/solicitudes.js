@@ -61,9 +61,12 @@ export const getSolicitudesUsuario = async (req, res) => {
             fecha_rechazada: {
               [Op.is]: null // Like: sellDate IS NOT NULL
             },
+            fecha_espera: {
+              [Op.is]: null // Like: sellDate IS NOT NULL
+            },
           },
          
-          attributes: ["id_solicitud", "descrip_solicitud", "fecha_aprobada", "fecha_rechazada"],
+          attributes: ["id_solicitud", "descrip_solicitud", "fecha_aprobada", "fecha_rechazada",  "fecha_espera"],
         });
 
         res.json(solicitudes);
@@ -199,6 +202,29 @@ export const rechazarSolicitud = async (req, res) => {
 
     if (solicitud) {
       solicitud.update({ fecha_rechazada: new Date() });
+      res.json(solicitud);
+    } else {
+      res.status(404).json({
+        msg: `No existe una solicitud con el id ${id}`,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      msg: "No se pudo realizar la operación. Póngase en contacto con el administrador",
+    });
+  }
+};
+
+
+export const esperarSolicitud = async (req, res) => {
+  const { id } = req.params;
+  const {causa_espera}  = req.body;
+
+  try {
+    const solicitud = await Models.Solicitud.findByPk(id);
+
+    if (solicitud) {
+      solicitud.update({ fecha_espera: new Date()});
       res.json(solicitud);
     } else {
       res.status(404).json({

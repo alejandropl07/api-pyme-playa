@@ -8,6 +8,7 @@ import {
   aprobarSolicitud,
   finalizarSolicitud,
   rechazarSolicitud,
+  esperarSolicitud,
 } from "../controllers/solicitudes.js";
 
 const router = Router();
@@ -20,5 +21,6 @@ router.put("/:id", putSolicitud);
 router.put("/aprobarSolicitud/:id", aprobarSolicitud);
 router.put("/rechazarSolicitud/:id", rechazarSolicitud);
 router.put("/finalizarSolicitud/:id", finalizarSolicitud);
+router.put("/esperarSolicitud/:id", esperarSolicitud);
 
 export default router;
