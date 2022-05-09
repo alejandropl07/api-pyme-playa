@@ -71,6 +71,9 @@ export const getSolicitudesUsuario = async (req, res) => {
       else if (usuario.rol_usuario === "Logistico") {
         const solicitudes = await Models.Solicitud.findAll({
           where:{
+            fecha_aprobada: {
+              [Op.not]: null // Like: sellDate IS NOT NULL
+            },
             fecha_revisada: {
               [Op.is]: null // Like: sellDate IS NOT NULL
             },
