@@ -68,6 +68,19 @@ export const getSolicitudesUsuario = async (req, res) => {
 
         res.json(solicitudes);
       }
+      else if (usuario.rol_usuario === "Logistico") {
+        const solicitudes = await Models.Solicitud.findAll({
+          where:{
+            fecha_revisada: {
+              [Op.is]: null // Like: sellDate IS NOT NULL
+            },
+          },
+         
+          attributes: ["id_solicitud", "descrip_solicitud", "fecha_aprobada", "fecha_rechazada", "fecha_espera",  "fecha_revisada"],
+        });
+
+        res.json(solicitudes);
+      }
     } else {
       res.status(404).json({
         msg: `No existen solicitudes para el usuario con el id ${id} `,
@@ -205,6 +218,28 @@ export const aprobarSolicitud = async (req, res) => {
          solicitud.update({ fecha_aprobada: new Date()});
       else
          solicitud.update({ fecha_aprobada: new Date(), causa_espera: "", fecha_espera: null });
+      res.json(solicitud);
+    } else {
+      res.status(404).json({
+        msg: `No existe una solicitud con el id ${id}`,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      msg: "No se pudo realizar la operación. Póngase en contacto con el administrador",
+    });
+  }
+};
+
+
+export const aprobarSolicitudLog = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const solicitud = await Models.Solicitud.findByPk(id);
+
+    if (solicitud) {
+         solicitud.update({ fecha_revisada: new Date()});
       res.json(solicitud);
     } else {
       res.status(404).json({

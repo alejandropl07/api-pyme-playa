@@ -10,6 +10,7 @@ import {
   finalizarSolicitud,
   rechazarSolicitud,
   esperarSolicitud,
+  aprobarSolicitudLog,
 } from "../controllers/solicitudes.js";
 
 const router = Router();
@@ -21,6 +22,7 @@ router.get("/usuarioLogistico/:id", isRolLogistico);
 router.post("/", postSolicitud);
 router.put("/:id", putSolicitud);
 router.put("/aprobarSolicitud/:id", aprobarSolicitud);
+router.put("/aprobarSolicitudLog/:id", aprobarSolicitudLog);
 router.put("/rechazarSolicitud/:id", rechazarSolicitud);
 router.put("/finalizarSolicitud/:id", finalizarSolicitud);
 router.put("/esperarSolicitud/:id", esperarSolicitud);
