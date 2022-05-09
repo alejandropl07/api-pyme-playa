@@ -200,9 +200,7 @@ export const putSolicitud = async (req, res) => {
         msg: `No existe una solicitud con el id ${id}`,
       });
     }
-    res.status(200).json({
-      msg: "Solicitud modificada correctamente",
-    });
+    res.json(solicitud);
   } catch (error) {
     res.status(500).json({
       msg: "No se pudo realizar la operación. Póngase en contacto con el administrador",
