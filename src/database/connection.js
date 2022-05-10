@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize';
 
-const db = new Sequelize ('unevol_db', 'root', '',{
+const db = new Sequelize ('bd_unevol', 'root', '',{
     host: 'localhost',
     dialect: 'mysql',
     define: {
