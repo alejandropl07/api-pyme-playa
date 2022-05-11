@@ -1,11 +1,13 @@
 import Models from "../models/index.js";
 
+//Devuelve los clientes
 export const getClientes = async (req, res) => {
   const clientes = await Models.Cliente.findAll();
 
   res.json({ clientes });
 };
 
+//Crear nuevo cliente
 export const postCliente = async (req, res) => {
   const { body } = req;
 

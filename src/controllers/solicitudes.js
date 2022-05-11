@@ -2,6 +2,7 @@
 import Models from "../models/index.js";
 import {Op} from 'sequelize';
 
+//Devuelve una solicitud dado un id
 export const getSolicitud = async (req, res) => {
   const { id } = req.params;
   try {
@@ -35,6 +36,7 @@ export const getSolicitud = async (req, res) => {
   }
 };
 
+//Devuelve las solicitudes dado un id de usuario
 export const getSolicitudesUsuario = async (req, res) => {
   const { id } = req.params;
   const usuario = await Models.Usuario.findByPk(id);
@@ -96,6 +98,7 @@ export const getSolicitudesUsuario = async (req, res) => {
   }
 };
 
+//Conocer si un usuario es director, dado su id
 export const isRolDirector = async (req, res) => {
   const { id } = req.params;
   let result = false;
@@ -120,6 +123,7 @@ export const isRolDirector = async (req, res) => {
   }
 };
 
+//Conocer si un usuario es logistico, dado su id
 export const isRolLogistico = async (req, res) => {
   const { id } = req.params;
   let result = false;
@@ -144,6 +148,7 @@ export const isRolLogistico = async (req, res) => {
   }
 };
 
+//Crear nueva solicitud
 export const postSolicitud = async (req, res) => {
   const { body } = req;
   const { productos } = body;
@@ -170,6 +175,7 @@ export const postSolicitud = async (req, res) => {
   }
 };
 
+//Actualizar solicitud
 export const putSolicitud = async (req, res) => {
   const { id } = req.params;
   const { body } = req;
@@ -208,6 +214,7 @@ export const putSolicitud = async (req, res) => {
   }
 };
 
+//Aprobar solicitud por parte del director
 export const aprobarSolicitud = async (req, res) => {
   const { id } = req.params;
 
@@ -232,7 +239,7 @@ export const aprobarSolicitud = async (req, res) => {
   }
 };
 
-
+//Aprobar solicitud por parte del logistico
 export const aprobarSolicitudLog = async (req, res) => {
   const { id } = req.params;
 
@@ -254,7 +261,7 @@ export const aprobarSolicitudLog = async (req, res) => {
   }
 };
 
-
+//Rechazar solicitud por parte del director
 export const rechazarSolicitud = async (req, res) => {
   const { id } = req.params;
 
@@ -279,7 +286,7 @@ export const rechazarSolicitud = async (req, res) => {
   }
 };
 
-
+//Poner solicitud en espera
 export const esperarSolicitud = async (req, res) => {
   const { id } = req.params;
   const {causa_espera}  = req.body;
@@ -302,7 +309,7 @@ export const esperarSolicitud = async (req, res) => {
   }
 };
 
-
+//Finalizar solicitud por parte del comercial
 export const finalizarSolicitud = async (req, res) => {
   const { id } = req.params;
 
